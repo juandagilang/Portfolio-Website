@@ -1,0 +1,69 @@
+---
+import '@fontsource/fraunces/latin-400.css'
+import '@fontsource/fraunces/latin-500.css'
+import '@fontsource/fraunces/latin-600.css'
+import '@fontsource/schibsted-grotesk/latin-400.css'
+import '@fontsource/schibsted-grotesk/latin-500.css'
+import '@fontsource/schibsted-grotesk/latin-600.css'
+import '../styles/global.css'
+
+const { title = 'Juanda Gilang Purnomo · Backend Developer' } = Astro.props
+---
+
+<!doctype html>
+<html lang="en" class="grain">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Juanda Gilang Purnomo, backend developer in Jakarta building APIs with Go and CodeIgniter 4, backed by PostgreSQL and MySQL. See the journey and the work." />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-screen">
+    <header class="fixed inset-x-0 top-0 z-40 border-b border-line/70 bg-cream-100/85 backdrop-blur-md">
+      <nav class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4 sm:px-8">
+        <a href="#top" class="font-display text-lg font-semibold tracking-tight text-ink-900">
+          Juanda Gilang Purnomo<span class="text-ember-600">.</span>
+        </a>
+        <div class="hidden items-center gap-7 text-sm font-medium text-ink-700 sm:flex">
+          <a href="#about" class="transition-colors hover:text-ember-600">About</a>
+          <a href="#journey" class="transition-colors hover:text-ember-600">Journey</a>
+          <a href="#work" class="transition-colors hover:text-ember-600">Work</a>
+          <a href="#contact" class="rounded-full border border-ink-900 bg-ink-900 px-5 py-2 text-cream-50 transition-colors hover:bg-ember-600 hover:border-ember-600">
+            Let's talk
+          </a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="border-t border-line bg-paper py-10">
+      <div class="mx-auto flex max-w-5xl flex-col items-center justify-between gap-4 px-6 text-sm text-ink-500 sm:flex-row sm:px-8">
+        <p>© {new Date().getFullYear()} Juanda. Made with warmth &amp; Go.</p>
+        <p class="flex items-center gap-5">
+          <span class="uppercase tracking-widest text-xs">Designed &amp; built by hand</span>
+          <a href="#top" class="text-ember-600 hover:text-ink-900 transition-colors">Back to top ↑</a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible')
+              io.unobserve(entry.target)
+            }
+          }
+        },
+        { threshold: 0.12 }
+      )
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el))
+    </script>
+  </body>
+</html>

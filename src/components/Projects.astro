@@ -1,0 +1,112 @@
+---
+import SectionHeading from './SectionHeading.astro'
+
+const projects = [
+  {
+    title: 'Sistem Informasi Gereja',
+    tag: 'CodeIgniter 4 · MySQL · REST',
+    desc: 'Parish CMS and admin dashboard with a 10+ table schema: faster data retrieval (25%) and content updates (40%), used daily by staff across departments.',
+    accent: 'bg-ember-500',
+    link: 'https://www.parokitanjungpriok.org'
+  },
+  {
+    title: 'TechCare',
+    tag: 'Flutter · Agile',
+    desc: 'A device repair-service app I led a 4-person team to build during Hackfest, shipping 100% of planned features with Agile daily stand-ups.',
+    accent: 'bg-ember-500',
+    link: ''
+  },
+  {
+    title: 'Fitforma',
+    tag: 'TensorFlow · Kotlin · Android',
+    desc: 'A nutrient-tracking app from Bangkit Academy: an ML model at 85% accuracy and a low-latency Kotlin app, built with a 5-person team.',
+    accent: 'bg-ember-500',
+    link: ''
+  },
+  {
+    title: 'Company Profile Website',
+    tag: 'ReactJS · Tailwind CSS',
+    desc: 'A responsive corporate profile site, delivered as a freelance project for Megatama Global International in under 48 hours.',
+    accent: 'bg-ember-500',
+    link: ''
+  },
+]
+---
+
+<section id="work" class="mx-auto max-w-5xl px-6 py-24 sm:px-8">
+  <SectionHeading title="Things I've built, shipped, and stand behind." />
+
+  <div class="grid gap-6 sm:grid-cols-2">
+    {projects.map((p, index) => (
+      <article data-project-index={index} class="reveal group flex flex-col rounded-3xl border border-line bg-paper p-7 transition-shadow hover:shadow-lg hover:shadow-ink-900/5">
+        <h3 class="font-display text-2xl font-semibold text-ink-900">{p.title}</h3>
+        <p class="mt-1 text-xs font-semibold uppercase tracking-widest text-ember-600">{p.tag}</p>
+        <p class="mt-4 leading-relaxed text-ink-700">{p.desc}</p>
+        {p.link && (
+        <a href={p.link} target="_blank" class="mt-auto pt-6 text-sm font-medium text-ink-500 transition-colors group-hover:text-ember-600">
+          View project →
+        </a>
+        )}
+      </article>
+    ))}
+  </div>
+
+  {projects.length > 4 && (
+    <nav class="mt-8 flex items-center justify-center gap-3" aria-label="Project pagination">
+      <button type="button" data-project-prev class="rounded-full border border-line px-4 py-2 text-sm font-medium text-ink-500 transition-colors hover:border-ember-500 hover:text-ember-600 disabled:cursor-not-allowed disabled:opacity-40">
+        Previous
+      </button>
+      <span data-project-page class="text-sm text-ink-500" aria-live="polite"></span>
+      <button type="button" data-project-next class="rounded-full border border-line px-4 py-2 text-sm font-medium text-ink-500 transition-colors hover:border-ember-500 hover:text-ember-600 disabled:cursor-not-allowed disabled:opacity-40">
+        Next
+      </button>
+    </nav>
+  )}
+
+  <p class="reveal mt-10 text-center text-sm text-ink-500">
+    A few representative pieces. More details and code are a conversation away.
+  </p>
+</section>
+
+<script>
+  const projectsPerPage = 4
+  const projectSection = document.querySelector('#work')
+
+  if (projectSection) {
+    const projectCards = [...projectSection.querySelectorAll('[data-project-index]')]
+    const previousButton = projectSection.querySelector('[data-project-prev]')
+    const nextButton = projectSection.querySelector('[data-project-next]')
+    const pageLabel = projectSection.querySelector('[data-project-page]')
+    const pageCount = Math.max(1, Math.ceil(projectCards.length / projectsPerPage))
+    let currentPage = 1
+
+    const renderPage = () => {
+      projectCards.forEach((card, index) => {
+        card.classList.toggle(
+          'hidden',
+          index < (currentPage - 1) * projectsPerPage || index >= currentPage * projectsPerPage,
+        )
+      })
+
+      if (pageLabel) pageLabel.textContent = `Page ${currentPage} of ${pageCount}`
+      if (previousButton) previousButton.disabled = currentPage === 1
+      if (nextButton) nextButton.disabled = currentPage === pageCount
+    }
+
+    previousButton?.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage -= 1
+        renderPage()
+      }
+    })
+
+    nextButton?.addEventListener('click', () => {
+      if (currentPage < pageCount) {
+        currentPage += 1
+        renderPage()
+      }
+    })
+
+    renderPage()
+  }
+</script>

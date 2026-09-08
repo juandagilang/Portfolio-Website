@@ -1,0 +1,50 @@
+---
+import SectionHeading from './SectionHeading.astro'
+
+const facts = [
+  { label: 'Language', value: 'Go, my daily driver' },
+  { label: 'Focus', value: 'REST APIs & web systems' },
+  { label: 'Based in', value: 'Jakarta, Indonesia' },
+  { label: 'Currently', value: 'Open to backend roles' },
+]
+---
+
+<section id="about" class="mx-auto max-w-5xl px-6 py-24 sm:px-8">
+  <SectionHeading title="I'm a builder who cares about the quiet details." />
+
+  <div class="grid gap-12 md:grid-cols-5 md:gap-10">
+    <div class="reveal md:col-span-3">
+      <p class="mb-5 text-lg leading-relaxed text-ink-700">
+        Hello, I'm Juanda, a backend developer with over a year of production experience in Go and
+        CodeIgniter 4. I like my APIs honest, my schemas tidy, and my systems dependable: software that just
+        works, predictably, under real use.
+      </p>
+      <p class="mb-5 leading-relaxed text-ink-700">
+        My first real backend was a parish information system: I designed a MySQL schema with 10+ relational
+        tables, built the CMS and admin dashboard on CodeIgniter 4, and cut content updates by 40% and data
+        retrieval by 25% for staff across departments. I'm equally comfortable shaping React and Tailwind
+        frontends, and I've shipped an API-backed Android app that folds a TensorFlow model into a real product.
+        I've also run Study Jam workshops as a GDSC Curriculum Officer, so I can explain complex things to real
+        people.
+      </p>
+      <p class="leading-relaxed text-ink-700">
+        What I'm after is an entry-level backend role where I can grow my Go with senior engineers, building
+        things that matter, doing them properly, and staying honest about what they are.
+      </p>
+    </div>
+
+    <aside class="reveal md:col-span-2">
+      <div class="rounded-3xl border border-line bg-paper p-7">
+        <p class="kicker mb-5">A few facts</p>
+        <ul class="space-y-5 text-sm">
+          {facts.map((f) => (
+            <li class="flex flex-col gap-1">
+              <span class="uppercase tracking-widest text-xs text-ink-500">{f.label}</span>
+              <span class="font-medium text-ink-900">{f.value}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </aside>
+  </div>
+</section>
